@@ -1,0 +1,115 @@
+\usepackage{polyglossia}
+  \setdefaultlanguage{english}
+  \setotherlanguage{german}
+  \setotherlanguage{russian}
+
+%%% Resolve conflict between <chemmacros> package and command for hyperbolic cosine when using cyrrilic input
+\let\Ch\ch                                                  % Save the command for the hyperbolic cosine
+\let\ch\relax                                               % Undefine \ch
+
+\usepackage{geometry}
+\geometry{
+  left   = 3.00cm,
+  right  = 2.00cm,
+  top    = 2.00cm,
+  bottom = 2.00cm
+}
+
+\sloppy                                                     % Get rid of overflow
+
+\usepackage{amsmath}
+
+\usepackage{fontspec}
+%  \setmainfont{Liberation Serif}
+%  \setsansfont{Liberation Sans}
+%  \setmonofont{Liberation Mono}
+
+\usepackage{epigraph}
+
+\usepackage{tabularx}
+
+\usepackage{graphicx}
+
+\usepackage{float}
+
+\usepackage{tikz}
+  \usetikzlibrary{
+    decorations.markings}
+  \tikzset{>=latex}                                         % Define latex-type arrowheads globally
+
+\usepackage{tikz-cd}
+
+\usepackage{pgfplots}
+\pgfplotsset{
+%  samples = 200,
+}
+
+\usepackage{subcaption}
+
+% \usepackage[version=4]{mhchem}
+% \usepackage{chemformula}
+% \usepackage{chemstyle}
+
+\usepackage{upgreek}
+
+\usepackage{chemfig}
+
+\usepackage{chemmacros}
+\chemsetup{
+  modules              = all,
+  acid-base/p-style    = upright,                           % italics|slanted|upright
+  charges/circled      = formal,                            % formal|all|none
+  charges/circletype   = chem,                              % chem|math
+  nomenclature/iupac   = auto,                              % auto|restricted|strict
+  particles/elpair     = dots,                              % dots|dash|false
+  phases/pos           = side,                              % side|sub
+  isotopes/format      = super,                             % super|side
+  polymers/delimiters  = [],
+  reactions/before-tag = R,
+  reactions/tag-open   = [,
+  reactions/tag-close  = ],
+  redox/parse          = true,                              % true|false
+  redox/roman          = true,                              % true|false
+  redox/pos            = super                              % top|super|side
+}
+
+\usepackage{siunitx}
+\sisetup{
+  detect-family = true,
+  detect-all
+}
+
+% \usepackage{microtype}
+
+% \usepackage{mmap}
+
+\usepackage[
+  backend = biber,
+%  style   = chem-acs,
+  sorting=none,
+  doi     = true,
+  isbn    = true,
+  url     = false,
+]{biblatex}                                                 % Bibliography engine setup
+\addbibresource{../../Library/Chemistry/references-chem.bib}
+
+\usepackage{csquotes}                                       % Package for proper quotation marks
+
+\graphicspath{{graphics/}}
+
+\usepackage[colorlinks]{hyperref}
+\makeatletter
+\hypersetup{
+  pdftitle   = {\@title},
+  pdfauthor  = {\@author},
+  colorlinks = true,
+  unicode    = true,
+  citecolor  = red,
+  filecolor  = black,
+  linkcolor  = blue,
+  urlcolor   = blue
+}
+\makeatother
+
+\usepackage[xindy,toc]{glossaries}
+\makeglossaries
