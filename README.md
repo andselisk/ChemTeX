@@ -1,2 +1,2 @@
 # chex
-TeX-related goodies for chemists
+TeX-related goodies for chemists.
