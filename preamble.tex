@@ -15,14 +15,14 @@
   bottom = 2.00cm
 }
 
-\sloppy                                                     % Get rid of overflow
+\sloppy  % Get rid of overflow
 
 \usepackage{amsmath}
 
 \usepackage{fontspec}
-%  \setmainfont{Liberation Serif}
-%  \setsansfont{Liberation Sans}
-%  \setmonofont{Liberation Mono}
+% \setmainfont{Liberation Serif}
+% \setsansfont{Liberation Sans}
+% \setmonofont{Liberation Mono}
 
 \usepackage{epigraph}
 
@@ -35,7 +35,7 @@
 \usepackage{tikz}
   \usetikzlibrary{
     decorations.markings}
-  \tikzset{>=latex}                                         % Define latex-type arrowheads globally
+  \tikzset{>=latex} % Define latex-type arrowheads globally
 
 \usepackage{tikz-cd}
 
@@ -55,22 +55,28 @@
 \usepackage{chemfig}
 
 \usepackage{chemmacros}
+\usepackage{chemformula}
 \chemsetup{
-  modules              = all,
-  acid-base/p-style    = upright,                           % italics|slanted|upright
-  charges/circled      = formal,                            % formal|all|none
-  charges/circletype   = chem,                              % chem|math
-  nomenclature/iupac   = auto,                              % auto|restricted|strict
-  particles/elpair     = dots,                              % dots|dash|false
-  phases/pos           = side,                              % side|sub
-  isotopes/format      = super,                             % super|side
-  polymers/delimiters  = [],
-  reactions/before-tag = R,
-  reactions/tag-open   = [,
-  reactions/tag-close  = ],
-  redox/parse          = true,                              % true|false
-  redox/roman          = true,                              % true|false
-  redox/pos            = super                              % top|super|side
+  modules                   = all,
+  formula                   = chemformula, % chemformula|mhchem|chemist|chemfig
+  chemformula/frac-style    = math,        % math|xfrac|nicefrac
+  chemformula/lewis-default = |,           % .|:|||o|single|pair|pair (dotted)|pair (line)|empty
+  chemformula/circled       = formal,      % formal|all|none
+  chemformula/circletype    = chem,        % chem|math
+  acid-base/p-style         = upright,     % italics|slanted|upright
+  charges/circled           = formal,      % formal|all|none
+  charges/circletype        = chem,        % chem|math
+  nomenclature/iupac        = auto,        % auto|restricted|strict
+  particles/elpair          = dots,        % dots|dash|false
+  phases/pos                = side,        % side|sub
+  isotopes/format           = super,       % super|side
+  polymers/delimiters       = [],
+  reactions/before-tag      = R,
+  reactions/tag-open        = [,
+  reactions/tag-close       = ],
+  redox/parse               = true,        % true|false
+  redox/roman               = true,        % true|false
+  redox/pos                 = super,       % top|super|side
 }
 
 \usepackage{siunitx}
@@ -90,10 +96,10 @@
   doi     = true,
   isbn    = true,
   url     = false,
-]{biblatex}                                                 % Bibliography engine setup
+]{biblatex} % Bibliography engine setup
 \addbibresource{../../Library/Chemistry/references-chem.bib}
 
-\usepackage{csquotes}                                       % Package for proper quotation marks
+\usepackage{csquotes} % Package for proper quotation marks
 
 \graphicspath{{graphics/}}
 
@@ -113,3 +119,5 @@
 
 \usepackage[xindy,toc]{glossaries}
 \makeglossaries
+
+\listfiles % Show packages info in log-file
