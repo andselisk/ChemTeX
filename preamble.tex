@@ -1,28 +1,30 @@
-\usepackage{polyglossia}
-  \setdefaultlanguage{english}
-  \setotherlanguage{german}
-  \setotherlanguage{russian}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   PACKAGES                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% Resolve conflict between <chemmacros> package and command for hyperbolic cosine when using cyrrilic input
-\let\Ch\ch                                                  % Save the command for the hyperbolic cosine
-\let\ch\relax                                               % Undefine \ch
+% Resolve conflict between <chemmacros> package and command for hyperbolic cosine
+\let\Ch\ch    % Save the command for the hyperbolic cosine
+\let\ch\relax % Undefine \ch
+
+\usepackage[T1]{fontenc}
+
+\usepackage[english]{babel}
 
 \usepackage{geometry}
 \geometry{
   left   = 3.00cm,
-  right  = 2.00cm,
+  right  = 1.75cm,
   top    = 2.00cm,
   bottom = 2.00cm
 }
 
-\sloppy  % Get rid of overflow
+\sloppy
 
 \usepackage{amsmath}
 
-\usepackage{fontspec}
-% \setmainfont{Liberation Serif}
-% \setsansfont{Liberation Sans}
-% \setmonofont{Liberation Mono}
+\usepackage{amsfonts}
+
+\usepackage{amssymb}
 
 \usepackage{epigraph}
 
@@ -30,12 +32,15 @@
 
 \usepackage{graphicx}
 
+\usepackage{xcolor}
+
 \usepackage{float}
 
 \usepackage{tikz}
   \usetikzlibrary{
-    decorations.markings}
-  \tikzset{>=latex} % Define latex-type arrowheads globally
+    decorations.markings
+  }
+  \tikzset{>=latex}
 
 \usepackage{tikz-cd}
 
@@ -46,21 +51,16 @@
 
 \usepackage{subcaption}
 
-% \usepackage[version=4]{mhchem}
-% \usepackage{chemformula}
-% \usepackage{chemstyle}
-
 \usepackage{upgreek}
 
 \usepackage{chemfig}
 
 \usepackage{chemmacros}
-\usepackage{chemformula}
 \chemsetup{
   modules                   = all,
   formula                   = chemformula, % chemformula|mhchem|chemist|chemfig
   chemformula/frac-style    = math,        % math|xfrac|nicefrac
-  chemformula/lewis-default = |,           % .|:|||o|single|pair|pair (dotted)|pair (line)|empty
+  chemformula/lewis-default = pair,        % .|:|||o|single|pair|pair (dotted)|pair (line)|empty
   chemformula/circled       = formal,      % formal|all|none
   chemformula/circletype    = chem,        % chem|math
   acid-base/p-style         = upright,     % italics|slanted|upright
@@ -77,6 +77,7 @@
   redox/parse               = true,        % true|false
   redox/roman               = true,        % true|false
   redox/pos                 = super,       % top|super|side
+  greek                     = upgreek,
 }
 
 \usepackage{siunitx}
@@ -90,16 +91,20 @@
 % \usepackage{mmap}
 
 \usepackage[
-  backend = biber,
-%  style   = chem-acs,
-  sorting=none,
-  doi     = true,
-  isbn    = true,
-  url     = false,
-]{biblatex} % Bibliography engine setup
+  backend    = biber,
+%  style      = chem-acs,
+  sorting    = none,
+  firstinits = true,
+  doi        = true,
+  isbn       = true,
+  url        = true,
+]{biblatex}
 \addbibresource{../../Library/Chemistry/references-chem.bib}
 
-\usepackage{csquotes} % Package for proper quotation marks
+\usepackage[
+  autostyle,
+  english = american
+  ]{csquotes}
 
 \graphicspath{{graphics/}}
 
@@ -121,3 +126,53 @@
 \makeglossaries
 
 \listfiles % Show packages info in log-file
+
+% Add new picture
+\newcommand{\addimg}[3]{
+  \begin{figure}
+    \begin{center}
+      \includegraphics[scale=#2]{#1}
+    \end{center}
+    \caption{#3}
+  \end{figure}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               NEW COMMANDS                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Add supplementary information
+\newcommand{\beginsupplement}{
+  \setcounter{table}{0}
+  \renewcommand{\thetable}{S\arabic{table}}
+  \setcounter{figure}{0}
+  \renewcommand{\thefigure}{S\arabic{figure}}
+}
+
+% List of accented words
+\newcommand{\cterm}[1]{\textit{#1}}          % Define chemical term
+\newcommand{\mterm}[1]{\textit{\textsf{#1}}} % Define machinery term
+
+% List of common chmicals abbreviations
+\newcommand{\nPr}{\textit{\textsuperscript{n}}Pr}
+\newcommand{\iPr}{\textit{\textsuperscript{i}}Pr}
+\newcommand{\nBu}{\textit{\textsuperscript{n}}Bu}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                    MACROS                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Drawing brackets in polymers, copied from p. 43  http://mirror.ox.ac.uk/sites/ctan.org/macros/generic/chemfig/chemfig_doc_en.pdf
+\newcommand\setpolymerdelim[2]{\def\delimleft{#1}\def\delimright{#2}}
+\def\makebraces[#1,#2]#3#4#5{%
+  \edef\delimhalfdim{\the\dimexpr(#1+#2)/2}%
+  \edef\delimvshift{\the\dimexpr(#1-#2)/2}%
+  \chemmove{%
+    \node[at=(#4),yshift=(\delimvshift)]
+    {$\left\delimleft\vrule height\delimhalfdim depth\delimhalfdim
+      width0pt\right.$};%
+    \node[at=(#5),yshift=(\delimvshift)]
+    {$\left.\vrule height\delimhalfdim depth\delimhalfdim
+      width0pt\right\delimright_{\rlap{$\scriptstyle#3$}}$};}}
+\setpolymerdelim()
+
